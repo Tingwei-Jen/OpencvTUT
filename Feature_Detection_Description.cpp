@@ -14,6 +14,17 @@ void readme(){
 	std::cout << " Usage: ./SURF_detector <img1> <img2>" << std::endl; 
 }
 
+void DetectFeatureFast(Mat img)
+{
+    Ptr<FastFeatureDetector> fastDetector = FastFeatureDetector::create();
+    vector<KeyPoint> keyPoints;
+    fastDetector->detect(img, keyPoints);
+    Mat img_keypoints;
+    drawKeypoints( img, keyPoints, img_keypoints, Scalar::all(-1), DrawMatchesFlags::DEFAULT );
+    imshow("img_keypoints", img_keypoints);
+    waitKey(0);
+}
+
 void DetectFeatureSURF(Mat img, int minHessian){
 
   	//-- Step 1: Detect the keypoints using SURF Detector
